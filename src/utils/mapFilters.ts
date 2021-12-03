@@ -1,6 +1,4 @@
-import { GetListParams } from 'ra-core';
-
-export const mapFilters = (params: GetListParams) => {
+export const mapFilters = (params: { filter: any }) => {
   const { q, ...filters } = params.filter || {};
   // TODO: add the ability for the user to add custom mapping
   const search = q

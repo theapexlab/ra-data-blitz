@@ -1,0 +1,71 @@
+import getBlitzDataProvider from './index';
+
+let dataProvider;
+
+beforeEach(() => {
+  dataProvider = getBlitzDataProvider({ invoke: global.mockedInvoke });
+});
+
+describe('index', () => {
+  it('should return a data provider', () => {
+    expect(dataProvider).toBeDefined();
+  });
+
+  test('getList should work', async () => {
+    const response = await dataProvider.getList('posts', {
+      filter: { q: 'asdfasdf' },
+      pagination: { page: 1, perPage: 10 },
+      sort: { field: 'id', order: 'ASC' },
+    });
+    expect(response.data).toBeDefined();
+    expect(response.total).toBeDefined();
+  });
+
+  test('getOne should work', async () => {
+    const response = await dataProvider.getOne('posts', { id: 1 });
+    expect(response.data).toBeDefined();
+  });
+
+  test('getMany should work', async () => {
+    const response = await dataProvider.getMany('posts', { ids: [1, 2] });
+    expect(response.data).toBeDefined();
+  });
+
+  test('getManyReference should work', async () => {
+    const response = await dataProvider.getManyReference('posts', {
+      target: 'comments',
+      pagination: { page: 1, perPage: 10 },
+      sort: { field: 'id', order: 'ASC' },
+    });
+    expect(response.data).toBeDefined();
+    expect(response.total).toBeDefined();
+  });
+
+  test('update should work', async () => {
+    const response = await dataProvider.update('posts', { id: 1, data: { title: 'asdf' } });
+    expect(response.data).toBeDefined();
+  });
+
+  test('updateMany should work', async () => {
+    const response = await dataProvider.updateMany('posts', {
+      ids: [1, 2],
+      data: { title: 'asdf' },
+    });
+    expect(response.data).toBeDefined();
+  });
+
+  test('create should work', async () => {
+    const response = await dataProvider.create('posts', { data: { title: 'asdf' } });
+    expect(response.data).toBeDefined();
+  });
+
+  test('delete should work', async () => {
+    const response = await dataProvider.delete('posts', { id: 1 });
+    expect(response.data).toBeDefined();
+  });
+
+  test('deleteMany should work', async () => {
+    const response = await dataProvider.deleteMany('posts', { ids: [1, 2] });
+    expect(response.data).toBeDefined();
+  });
+});

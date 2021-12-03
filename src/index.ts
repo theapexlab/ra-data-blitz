@@ -1,6 +1,8 @@
 import { DataProvider } from 'ra-core';
 import { BlitzDataProviderParams, QueryMethod } from './types';
-import { getHandler, mapPaginationAndSort, mapFilters } from './utils/getEntityNameFromResource';
+import { getHandler } from './utils/getHandler';
+import { mapFilters } from './utils/mapFilters';
+import { mapPaginationAndSort } from './utils/mapPaginationAndSort';
 
 const getBlitzDataProvider = ({ invoke }: BlitzDataProviderParams): DataProvider => ({
   getList: async (resource, params) => {
@@ -41,18 +43,13 @@ const getBlitzDataProvider = ({ invoke }: BlitzDataProviderParams): DataProvider
     const handler = await getHandler({ resource, plural: true, invoke });
     const data = await handler({
       ...mapPaginationAndSort(params),
-      ...{
-        where: {
-          id: params.id,
-        },
-        includes: {
-          [params.target]: true,
-        },
+      where: {
+        [params.target]: params.id,
       },
     });
 
     return {
-      data: data[resource][params.target],
+      data: data[resource],
       total: data.count,
     };
   },
@@ -86,9 +83,7 @@ const getBlitzDataProvider = ({ invoke }: BlitzDataProviderParams): DataProvider
 
   create: async (resource, params) => {
     const handler = await getHandler({ resource, method: QueryMethod.Create, invoke });
-    const data = await handler({
-      ...params.data,
-    });
+    const data = await handler(params.data);
 
     return {
       data,
