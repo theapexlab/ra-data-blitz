@@ -1,42 +1,49 @@
 {
-  "name": "ra-data-blitz",
-  "version": "0.0.1",
+  "name": "@theapexlab/ra-data-blitz",
+  "version": "0.0.5",
   "description": "A react-admin data provider for Blitz.js.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "public": true,
+  "author": "theapexlab",
+  "keywords": [
+    "blitzjs",
+    "react-admin",
+    "ra-data",
+    "data provider"
+  ],
   "scripts": {
-    "test": "jest --config jestconfig.json",
+    "test": "jest",
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "prepublishOnly": "npm test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/theapexlab/ra-data-blitz.git"
   },
-  "keywords": [
-    "Hello",
-    "Greeter"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/theapexlab/ra-data-blitz/issues"
   },
   "homepage": "https://github.com/theapexlab/ra-data-blitz#readme",
   "devDependencies": {
-    "@types/jest": "^22.2.3",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
+    "@types/jest": "^27.0.3",
+    "babel-jest": "^27.4.2",
     "codecov": "^3.1.0",
-    "jest": "^23.6.0",
+    "jest": "^27.4.3",
     "prettier": "^1.13.2",
-    "ts-jest": "^22.4.6",
-    "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.13.0",
-    "typescript": "^2.8.3"
+    "ra-core": "^3.19.2",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.5.2"
+  },
+  "peerDependencies": {
+    "blitz": "*",
+    "react": "*",
+    "react-admin": "*"
   },
   "files": [
     "lib/**/*"
