@@ -32,6 +32,7 @@
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-typescript": "^7.16.0",
     "@types/jest": "^27.0.3",
+    "@types/pluralize": "^0.0.29",
     "babel-jest": "^27.4.2",
     "codecov": "^3.1.0",
     "jest": "^27.4.3",
@@ -47,5 +48,9 @@
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "dependencies": {
+    "pascal-case": "^3.1.2",
+    "pluralize": "^8.0.0"
+  }
 }
