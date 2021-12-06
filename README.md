@@ -1,4 +1,4 @@
-# ra-data-blitz
+# Blitz-js data provider for react-admin
 
 Easily build fullstack backoffice apps with [blitz-js](https://github.com/blitz-js/blitz) and [react-admin](https://github.com/marmelab/react-admin)!
 
