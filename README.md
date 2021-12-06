@@ -99,3 +99,6 @@ export const PostList = (props) => (
 )
 
 ```
+
+##  License
+This data provider is licensed under the MIT License.
