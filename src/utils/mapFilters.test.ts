@@ -2,17 +2,61 @@ import { mapFilters } from './mapFilters';
 
 describe('mapFilters', () => {
   it('should map filters correctly', () => {
-    const response = mapFilters({
-      filter: {
-        q: 'test',
+    const testSearchEntities = (q: string) => ({
+      user: {
+        OR: [
+          {
+            email: {
+              contains: q,
+            },
+          },
+          {
+            name: {
+              contains: q,
+            },
+          },
+        ],
+      },
+      post: {
+        OR: [
+          {
+            title: {
+              contains: q,
+            },
+          },
+          {
+            content: {
+              contains: q,
+            },
+          },
+        ],
       },
     });
 
+    const response = mapFilters(
+      {
+        filter: {
+          q: 'test',
+        },
+      },
+      'users',
+      testSearchEntities,
+    );
+    
     expect(response).toEqual({
       where: {
-        email: {
-          contains: 'test',
-        },
+        OR: [
+          {
+            email: {
+              contains: 'test',
+            },
+          },
+          {
+            name: {
+              contains: 'test',
+            },
+          },
+        ],
       },
     });
   });

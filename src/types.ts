@@ -1,20 +1,19 @@
 export enum QueryMethod {
-    Get = "get",
-    Update = "update",
-    Create = "create",
-    Delete = "delete",
-  }
-  
+  Get = 'get',
+  Update = 'update',
+  Create = 'create',
+  Delete = 'delete',
+}
+
 export type GetHandlerModuleParams = {
-  resource: string
-  method?: QueryMethod
-  plural?: boolean
-}
+  resource: string;
+  method?: QueryMethod;
+  plural?: boolean;
+};
 
-export type BlitzDataProviderParams  = {
-  invoke: (module: any, params: any) => any
-}
+export type BlitzDataProviderParams = {
+  invoke: (module: any, params: any) => any;
+  searchEntities: (q: string) => any;
+};
 
-export type GetHandlerParams = GetHandlerModuleParams & BlitzDataProviderParams
-
-  
+export type GetHandlerParams = GetHandlerModuleParams & Pick<BlitzDataProviderParams, 'invoke'>;

@@ -1,18 +1,22 @@
-export const mapFilters = (params: { filter: any }) => {
-  const { q, ...filters } = params.filter || {};
-  // TODO: add the ability for the user to add custom mapping
-  const search = q
-    ? {
-        email: {
-          contains: q,
-        },
-      }
-    : undefined;
+import { getEntityNameFromResource } from './getEntityNameFromResource';
 
-  return {
-    where: {
-      ...search,
-      ...filters,
-    },
-  };
+export const mapFilters = (params: { filter: any }, resource: string, searchEntities?: (q: string) => any) => {
+  const { q, ...filters } = params.filter || {};
+  if (q && searchEntities) {
+    const resourceEntity = getEntityNameFromResource(resource);
+    const prismaResouce = resourceEntity.charAt(0).toLocaleLowerCase() + resourceEntity.slice(1);
+    const search = searchEntities(q)[prismaResouce];
+    return {
+      where: {
+        ...search,
+        ...filters,
+      },
+    };
+  } else {
+    return {
+      where: {
+        ...filters,
+      },
+    };
+  }
 };
