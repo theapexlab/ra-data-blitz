@@ -1,9 +1,16 @@
 import getBlitzDataProvider from './index';
 
 let dataProvider;
+const searchEntities = (q: string) => ({
+  user: {
+    name: {
+      contains: q,
+    },
+  },
+});
 
 beforeEach(() => {
-  dataProvider = getBlitzDataProvider({ invoke: global.mockedInvoke });
+  dataProvider = getBlitzDataProvider({ invoke: global.mockedInvoke, searchEntities });
 });
 
 describe('index', () => {
