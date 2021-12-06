@@ -1,4 +1,4 @@
-import { singular, isPlural } from 'pluralize';
+import { singular } from 'pluralize';
 import { pascalCase } from 'pascal-case';
 
 export const getEntityNameFromResource = (resource: string) => {

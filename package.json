@@ -1,6 +1,6 @@
 {
   "name": "@theapexlab/ra-data-blitz",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A react-admin data provider for Blitz.js.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
