@@ -100,5 +100,16 @@ export const PostList = (props) => (
 
 ```
 
+## Options
+
+### Customize root path of the resource
+
+The default is to target resources under the `app/` directory. if there is a program for the server, such as an API root, specify `handleRoot` to avoid it.
+
+```js
+// Change the default directory of handleRoot from `app/`.
+const dataProvider = blitzDataProvider({ invoke, searchEntities, handleRoot: 'app/reactAdmin' });
+```
+
 ##  License
 This data provider is licensed under the MIT License.

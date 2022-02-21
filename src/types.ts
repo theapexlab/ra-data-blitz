@@ -6,6 +6,7 @@ export enum QueryMethod {
 }
 
 export type GetHandlerModuleParams = {
+  handlerRoot: string;
   resource: string;
   method?: QueryMethod;
   plural?: boolean;
@@ -14,6 +15,7 @@ export type GetHandlerModuleParams = {
 export type BlitzDataProviderParams = {
   invoke: (module: any, params: any) => any;
   searchEntities: (q: string) => any;
+  handlerRoot?: string;
 };
 
 export type GetHandlerParams = GetHandlerModuleParams & Pick<BlitzDataProviderParams, 'invoke'>;
