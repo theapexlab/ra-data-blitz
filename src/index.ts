@@ -4,9 +4,9 @@ import { getHandler } from './utils/getHandler';
 import { mapFilters } from './utils/mapFilters';
 import { mapPaginationAndSort } from './utils/mapPaginationAndSort';
 
-const getBlitzDataProvider = ({ invoke, searchEntities }: BlitzDataProviderParams): DataProvider => ({
+const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = 'app' }: BlitzDataProviderParams): DataProvider => ({
   getList: async (resource, params) => {
-    const handler = await getHandler({ resource, plural: true, invoke });
+    const handler = await getHandler({ handlerRoot, resource, plural: true, invoke });
     const data = await handler({ ...mapPaginationAndSort(params), ...mapFilters(params, resource, searchEntities) });
     return {
       data: data[resource],
@@ -16,7 +16,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities }: BlitzDataProviderParam
 
   getOne: async (resource, params) => {
     const id = params.id as string;
-    const handler = await getHandler({ resource, invoke });
+    const handler = await getHandler({ handlerRoot, resource, invoke });
     const data = await handler({ id: parseInt(id) });
     return {
       data,
@@ -24,7 +24,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities }: BlitzDataProviderParam
   },
 
   getMany: async (resource, params) => {
-    const handler = await getHandler({ resource, plural: true, invoke });
+    const handler = await getHandler({ handlerRoot, resource, plural: true, invoke });
     const data = await handler({
       where: {
         id: {
@@ -39,7 +39,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities }: BlitzDataProviderParam
   },
 
   getManyReference: async (resource, params) => {
-    const handler = await getHandler({ resource, plural: true, invoke });
+    const handler = await getHandler({ handlerRoot, resource, plural: true, invoke });
     const data = await handler({
       ...mapPaginationAndSort(params),
       where: {
@@ -54,7 +54,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities }: BlitzDataProviderParam
   },
 
   update: async (resource, params) => {
-    const handler = await getHandler({ resource, method: QueryMethod.Update, invoke });
+    const handler = await getHandler({ handlerRoot, resource, method: QueryMethod.Update, invoke });
     const data = await handler({
       id: params.id,
       ...params.data,
@@ -67,6 +67,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities }: BlitzDataProviderParam
     const responses = await Promise.all(
       params.ids.map(async id => {
         const handler = await getHandler({
+          handlerRoot,
           resource,
           method: QueryMethod.Update,
           invoke,
@@ -81,7 +82,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities }: BlitzDataProviderParam
   },
 
   create: async (resource, params) => {
-    const handler = await getHandler({ resource, method: QueryMethod.Create, invoke });
+    const handler = await getHandler({ handlerRoot, resource, method: QueryMethod.Create, invoke });
     const data = await handler(params.data);
 
     return {
@@ -90,7 +91,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities }: BlitzDataProviderParam
   },
 
   delete: async (resource, params) => {
-    const handler = await getHandler({ resource, method: QueryMethod.Delete, invoke });
+    const handler = await getHandler({ handlerRoot, resource, method: QueryMethod.Delete, invoke });
     const data = await handler({
       id: params.id,
     });
@@ -102,6 +103,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities }: BlitzDataProviderParam
     const responses = await Promise.all(
       params.ids.map(async id => {
         const handler = await getHandler({
+          handlerRoot,
           resource,
           method: QueryMethod.Delete,
           invoke,
