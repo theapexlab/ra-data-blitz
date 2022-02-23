@@ -4,7 +4,7 @@ import { getHandler } from './utils/getHandler';
 import { mapFilters } from './utils/mapFilters';
 import { mapPaginationAndSort } from './utils/mapPaginationAndSort';
 
-const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = 'app' }: BlitzDataProviderParams): DataProvider => ({
+const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: BlitzDataProviderParams): DataProvider => ({
   getList: async (resource, params) => {
     const handler = await getHandler({ handlerRoot, resource, plural: true, invoke });
     const data = await handler({ ...mapPaginationAndSort(params), ...mapFilters(params, resource, searchEntities) });
