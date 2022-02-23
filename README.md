@@ -30,11 +30,12 @@ model Post {
 ```
 
 Generate CRUD resolvers for the model by running the following command:
+
 ```sh
 blitz generate crud post
 ```
 
-Import `blitzDataProvider`  from  `@theapexlab/ra-data-blitz`  and optionally define a `searchEntities` function:
+Import `blitzDataProvider` from `@theapexlab/ra-data-blitz` and optionally define a `searchEntities` function:
 
 ```js
 // in App.js
@@ -45,19 +46,17 @@ import { PostList } from './PostList';
 import { PostEdit } from './PostEdit';
 import { PostCreate } from './PostCreate';
 import { invoke } from 'blitz';
-import { Prisma } from "db"
+import { Prisma } from 'db';
 
 // specifies search functionality of postFilters
-const searchEntities = (
-  q: string
-): { user: Prisma.PostWhereInput } => ({
+const searchEntities = (q: string): { user: Prisma.PostWhereInput } => ({
   // / NOTE: you can provide [prismaEnitityName]:  PrismaWhereInput pairs here
   post: {
     title: {
-      contains: q
-    }
-  }
-})
+      contains: q,
+    },
+  },
+});
 
 // invoke is neccasary to call blitzjs RPC api
 const dataProvider = blitzDataProvider({ invoke, searchEntities });
@@ -73,22 +72,14 @@ const ReactAdmin = () => {
 export default ReactAdmin;
 ```
 
-
 ```js
 // in PostList.tsx
-import {
-  List,
-  Datagrid,
-  TextField,
-  TextInput,
-} from "react-admin"
+import { List, Datagrid, TextField, TextInput } from 'react-admin';
 
 // NOTE: source must be "q" inorder to make search functionality work
-const postFilters = [
-  <TextInput key="search" source="q" label="Search" alwaysOn />,
-]
+const postFilters = [<TextInput key="search" source="q" label="Search" alwaysOn />];
 
-export const PostList = (props) => (
+export const PostList = props => (
   <List filters={postFilters} {...props} exporter={false}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
@@ -96,20 +87,20 @@ export const PostList = (props) => (
       <TextField source="content" />
     </Datagrid>
   </List>
-)
-
+);
 ```
 
 ## Options
 
 ### Customize root path of the resource
 
-The default is to target resources under the `app/` directory. if there is a program for the server, such as an API root, specify `handleRoot` to avoid it.
+The default is to target resources under the `app/` directory. if there is a program for the server, such as an API root, specify `handlerRoot` to avoid it.
 
 ```js
-// Change the default directory of handleRoot from `app/`.
-const dataProvider = blitzDataProvider({ invoke, searchEntities, handleRoot: 'app/reactAdmin' });
+// Change the default directory of handlerRoot from `app/` to `app/reactAdmin/`
+const dataProvider = blitzDataProvider({ invoke, searchEntities, handlerRoot: 'reactAdmin' });
 ```
 
-##  License
+## License
+
 This data provider is licensed under the MIT License.

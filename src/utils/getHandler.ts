@@ -6,10 +6,20 @@ import { getPluralEntityName } from './getPluralEntityName';
 const getHandlerModule = async ({ handlerRoot, resource, method, plural }: GetHandlerModuleParams) => {
   const entityName = getEntityNameFromResource(resource);
   const folder = method === QueryMethod.Get ? 'queries' : 'mutations';
-  return import(`${handlerRoot}/${resource}/${folder}/${method}${plural ? getPluralEntityName(entityName) : entityName}`);
+  return import(
+    `app${handlerRoot.length ? `/${handlerRoot}` : ''}/${resource}/${folder}/${method}${
+      plural ? getPluralEntityName(entityName) : entityName
+    }`
+  );
 };
 
-export const getHandler = async ({ handlerRoot, resource, method = QueryMethod.Get, plural = false, invoke }: GetHandlerParams) => {
+export const getHandler = async ({
+  handlerRoot,
+  resource,
+  method = QueryMethod.Get,
+  plural = false,
+  invoke,
+}: GetHandlerParams) => {
   if (!isPlural(resource)) {
     throw new Error(`Resource '${resource}' MUST be plural!`);
   }
