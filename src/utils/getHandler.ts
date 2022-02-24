@@ -7,7 +7,7 @@ const getHandlerModule = async ({ handlerRoot, resource, method, plural }: GetHa
   const entityName = getEntityNameFromResource(resource);
   const folder = method === QueryMethod.Get ? 'queries' : 'mutations';
   return import(
-    `app${handlerRoot.length ? `/${handlerRoot}` : ''}/${resource}/${folder}/${method}${
+    `app/${handlerRoot.length ? `${handlerRoot}/` : ''}${resource}/${folder}/${method}${
       plural ? getPluralEntityName(entityName) : entityName
     }`
   );
