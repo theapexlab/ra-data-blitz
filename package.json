@@ -1,6 +1,6 @@
 {
-  "name": "@theapexlab/ra-data-blitz",
-  "version": "0.1.0",
+  "name": "@makivlach/ra-data-blitz",
+  "version": "0.0.13",
   "description": "A react-admin data provider for Blitz.js.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -51,7 +51,7 @@
     "lib/**/*"
   ],
   "publishConfig": {
-    "@ra-data-blitz:registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "pascal-case": "^3.1.2",
