@@ -17,7 +17,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: Blit
   getOne: async (resource, params) => {
     const id = params.id as string;
     const handler = await getHandler({ handlerRoot, resource, invoke });
-    const data = await handler({ id: parseInt(id) });
+    const data = await handler({ id: Number.isNaN(Number(id)) ? id : parseInt(id) });
     return {
       data,
     };
