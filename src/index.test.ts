@@ -33,6 +33,11 @@ describe('index', () => {
     expect(response.data).toBeDefined();
   });
 
+  test('getOne should work with UUID', async () => {
+    const response = await dataProvider.getOne('posts', { id: '8bea3111-a52b-4bfc-aa0a-c7b49cd2adb4' });
+    expect(response.data).toBeDefined();
+  });
+
   test('getMany should work', async () => {
     const response = await dataProvider.getMany('posts', { ids: [1, 2] });
     expect(response.data).toBeDefined();
