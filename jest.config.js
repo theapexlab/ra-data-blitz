@@ -1,9 +1,28 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { pathsToModuleNameMapper } = require('ts-jest')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { compilerOptions } = require('./tsconfig.test.json')
+
 /*
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
 
 module.exports = {
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths /*, { prefix: '<rootDir>/' } */),
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "rootDir": "./",
+  setupFiles: ['<rootDir>/test/setup.ts'],
+  moduleDirectories: ['node_modules', "<rootDir>"],
+  "testEnvironment": "node",
+  "testRegex": ".*\\.test\\.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -123,9 +142,6 @@ module.exports = {
 
   // Allows you to use a custom runner instead of Jest's default test runner
   // runner: "jest-runner",
-
-  // The paths to modules that run some code to configure or set up the testing environment before each test
-  setupFiles: ['<rootDir>/test/setup.ts'],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],
