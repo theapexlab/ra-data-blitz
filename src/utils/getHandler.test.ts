@@ -21,6 +21,41 @@ describe('getHandler', () => {
     ).resolves.not.toThrow();
   });
 
+  it('should not throw for handle root of the resource is specified with kebab-case', async () => {
+    await expect(
+      getHandler({
+        handlerRoot: 'app/react-admin',
+        resource: 'posts',
+        method: QueryMethod.Get,
+        invoke: global.mockedInvoke,
+        kebabCase: true,
+      }),
+    ).resolves.not.toThrow();
+  });
+
+  it('should not throw for handle root of the resource is specified outside of app folder with kebab-case on', async () => {
+    await expect(
+      getHandler({
+        handlerRoot: 'src/react-admin',
+        resource: 'posts',
+        method: QueryMethod.Get,
+        invoke: global.mockedInvoke,
+        kebabCase: true,
+      }),
+    ).resolves.not.toThrow();
+  });
+
+  it('should not throw for handle root of the resource is specified outside of app folder', async () => {
+    await expect(
+      getHandler({
+        handlerRoot: 'src/reactAdmin',
+        resource: 'posts',
+        method: QueryMethod.Get,
+        invoke: global.mockedInvoke,
+      }),
+    ).resolves.not.toThrow();
+  });
+
   it('should throw error for non existing resource', async () => {
     await expect(
       getHandler({ handlerRoot: '', resource: 'non-existing', method: QueryMethod.Get, invoke: global.mockedInvoke }),
