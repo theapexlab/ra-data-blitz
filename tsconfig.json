@@ -10,8 +10,8 @@
     "esModuleInterop": true,
     "strict": false,
     "incremental": true,
-    "sourceMap": true,
-    "declarationMap": true
+    "sourceMap": false,
+    "declarationMap": false
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"],
