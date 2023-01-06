@@ -1,4 +1,4 @@
-import { mapPaginationAndSort } from './mapPaginationAndSort';
+import { mapPaginationAndSort } from '~/utils/mapPaginationAndSort';
 
 describe('mapPaginationAndSort', () => {
   it('should map pagination and sort correctly', () => {

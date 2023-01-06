@@ -1,7 +1,7 @@
 import { isPlural } from 'pluralize';
-import { QueryMethod, GetHandlerParams, GetHandlerModuleParams } from '../types';
-import { getEntityNameFromResource } from './getEntityNameFromResource';
-import { getPluralEntityName } from './getPluralEntityName';
+import { QueryMethod, GetHandlerParams, GetHandlerModuleParams } from '~/types';
+import { getEntityNameFromResource } from '~/utils/getEntityNameFromResource';
+import { getPluralEntityName } from '~/utils/getPluralEntityName';
 import kebabCaseUtil from 'kebab-case'
 
 const getHandlerModule = async ({ handlerRoot = 'app', resource, method, plural }: GetHandlerModuleParams) => {

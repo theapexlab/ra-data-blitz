@@ -1,5 +1,5 @@
-import { QueryMethod } from '../types';
-import { getHandler } from './getHandler';
+import { QueryMethod } from '~/types';
+import { getHandler } from '~/utils/getHandler';
 
 describe('getHandler', () => {
   it('should not throw for valid resource and methods', async () => {

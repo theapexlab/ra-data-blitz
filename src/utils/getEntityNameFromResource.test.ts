@@ -1,4 +1,4 @@
-import { getEntityNameFromResource } from './getEntityNameFromResource';
+import { getEntityNameFromResource } from '~/utils/getEntityNameFromResource';
 
 describe('getEntityNameFromResource', () => {
   it('should always return resource name in singular - PascalCase fromat', () => {

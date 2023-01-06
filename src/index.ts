@@ -1,8 +1,8 @@
 import { DataProvider } from 'ra-core';
-import { BlitzDataProviderParams, QueryMethod } from './types';
-import { getHandler } from './utils/getHandler';
-import { mapFilters } from './utils/mapFilters';
-import { mapPaginationAndSort } from './utils/mapPaginationAndSort';
+import { BlitzDataProviderParams, QueryMethod } from '~/types';
+import { getHandler } from '~/utils/getHandler';
+import { mapFilters } from '~/utils/mapFilters';
+import { mapPaginationAndSort } from '~/utils/mapPaginationAndSort';
 
 const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = 'app',  kebabCase = false }: BlitzDataProviderParams): DataProvider => ({
   getList: async (resource, params) => {
