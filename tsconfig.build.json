@@ -1,23 +1,5 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": ["esnext"],
-    "outDir": "./lib",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "declaration": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "strict": false,
-    "incremental": true,
-    "sourceMap": true,
-    "declarationMap": true,
-    "paths": {
-      "~/utils/*": ["./src/utils/*"],
-      "~/types": ["./src/types"]
-      }
-    },
-  "include": ["src"],
+  "extends": "./tsconfig.json",
   "exclude": ["node_modules", "**/__tests__/*",
     "./src/**/*.test.ts",
     "./test/*"]
