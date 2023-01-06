@@ -5,7 +5,7 @@ describe('getHandler', () => {
   it('should not throw for valid resource and methods', async () => {
     for (const method of Object.values(QueryMethod)) {
       await expect(
-        getHandler({ handlerRoot: '', resource: 'posts', method, invoke: global.mockedInvoke }),
+        getHandler({ handlerRoot: 'app', resource: 'posts', method, invoke: global.mockedInvoke }),
       ).resolves.not.toThrow();
     }
   });
@@ -13,7 +13,7 @@ describe('getHandler', () => {
   it('should not throw for handle root of the resource is specified', async () => {
     await expect(
       getHandler({
-        handlerRoot: 'reactAdmin',
+        handlerRoot: 'app/reactAdmin',
         resource: 'posts',
         method: QueryMethod.Get,
         invoke: global.mockedInvoke,
