@@ -5,14 +5,18 @@
     "outDir": "./lib",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": false,
+    "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "strict": false,
     "incremental": true,
-    "sourceMap": false,
-    "declarationMap": false
-  },
+    "sourceMap": true,
+    "declarationMap": true,
+    "paths": {
+      "~/utils/*": ["./src/utils/*"],
+      "~/types": ["./src/types"],
+    }
+    },
   "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*"],
+  "exclude": ["node_modules", "**/__tests__/*"]
 }
