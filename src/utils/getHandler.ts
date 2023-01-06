@@ -19,7 +19,7 @@ export const getHandler = async ({
   resource,
   method = QueryMethod.Get,
   plural = false,
-  kebabCase,
+  kebabCase = false,
   invoke,
 }: GetHandlerParams) => {
   if (!isPlural(resource)) {
