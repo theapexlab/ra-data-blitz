@@ -1,4 +1,4 @@
-import { mapFilters } from './mapFilters';
+import { mapFilters } from '~/utils/mapFilters';
 
 describe('mapFilters', () => {
   it('should map filters correctly', () => {

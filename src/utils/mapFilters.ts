@@ -1,4 +1,4 @@
-import { getEntityNameFromResource } from './getEntityNameFromResource';
+import { getEntityNameFromResource } from '~/utils/getEntityNameFromResource';
 
 export const mapFilters = (params: { filter: any }, resource: string, searchEntities?: (q: string) => any) => {
   const { q, ...filters } = params.filter || {};

@@ -1,12 +1,12 @@
 import { DataProvider } from 'ra-core';
-import { BlitzDataProviderParams, QueryMethod } from './types';
-import { getHandler } from './utils/getHandler';
-import { mapFilters } from './utils/mapFilters';
-import { mapPaginationAndSort } from './utils/mapPaginationAndSort';
+import { BlitzDataProviderParams, QueryMethod } from '~/types';
+import { getHandler } from '~/utils/getHandler';
+import { mapFilters } from '~/utils/mapFilters';
+import { mapPaginationAndSort } from '~/utils/mapPaginationAndSort';
 
-const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: BlitzDataProviderParams): DataProvider => ({
+const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = 'app',  kebabCase = false }: BlitzDataProviderParams): DataProvider => ({
   getList: async (resource, params) => {
-    const handler = await getHandler({ handlerRoot, resource, plural: true, invoke });
+    const handler = await getHandler({ handlerRoot, resource, plural: true, invoke, kebabCase });
     const data = await handler({ ...mapPaginationAndSort(params), ...mapFilters(params, resource, searchEntities) });
     return {
       data: data[resource],
@@ -16,7 +16,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: Blit
 
   getOne: async (resource, params) => {
     const id = params.id as string;
-    const handler = await getHandler({ handlerRoot, resource, invoke });
+    const handler = await getHandler({ handlerRoot, resource, invoke, kebabCase });
     const data = await handler({ id: Number.isNaN(Number(id)) ? id : parseInt(id) });
     return {
       data,
@@ -24,7 +24,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: Blit
   },
 
   getMany: async (resource, params) => {
-    const handler = await getHandler({ handlerRoot, resource, plural: true, invoke });
+    const handler = await getHandler({ handlerRoot, resource, plural: true, invoke, kebabCase });
     const data = await handler({
       where: {
         id: {
@@ -39,7 +39,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: Blit
   },
 
   getManyReference: async (resource, params) => {
-    const handler = await getHandler({ handlerRoot, resource, plural: true, invoke });
+    const handler = await getHandler({ handlerRoot, resource, plural: true, invoke, kebabCase });
     const data = await handler({
       ...mapPaginationAndSort(params),
       where: {
@@ -54,7 +54,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: Blit
   },
 
   update: async (resource, params) => {
-    const handler = await getHandler({ handlerRoot, resource, method: QueryMethod.Update, invoke });
+    const handler = await getHandler({ handlerRoot, resource, method: QueryMethod.Update, invoke, kebabCase });
     const data = await handler({
       id: params.id,
       ...params.data,
@@ -71,6 +71,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: Blit
           resource,
           method: QueryMethod.Update,
           invoke,
+          kebabCase,
         });
         return handler({
           id,
@@ -82,7 +83,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: Blit
   },
 
   create: async (resource, params) => {
-    const handler = await getHandler({ handlerRoot, resource, method: QueryMethod.Create, invoke });
+    const handler = await getHandler({ handlerRoot, resource, method: QueryMethod.Create, invoke, kebabCase });
     const data = await handler(params.data);
 
     return {
@@ -91,7 +92,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: Blit
   },
 
   delete: async (resource, params) => {
-    const handler = await getHandler({ handlerRoot, resource, method: QueryMethod.Delete, invoke });
+    const handler = await getHandler({ handlerRoot, resource, method: QueryMethod.Delete, invoke, kebabCase });
     const data = await handler({
       id: params.id,
     });
@@ -107,6 +108,7 @@ const getBlitzDataProvider = ({ invoke, searchEntities, handlerRoot = '' }: Blit
           resource,
           method: QueryMethod.Delete,
           invoke,
+          kebabCase,
         });
         return handler({
           id,
