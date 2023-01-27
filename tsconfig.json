@@ -1,22 +1,24 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["esnext"],
-    "outDir": "./lib",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "declaration": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "strict": false,
-    "incremental": true,
-    "sourceMap": true,
-    "declarationMap": true,
     "paths": {
-      "~/utils/*": ["./src/utils/*"],
-      "~/types": ["./src/types"]
-      }
+      "~/utils/*": ["./utils/*"],
+      "~/types": ["./types"]
     },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+    "baseUrl": "./src",
+    "rootDir": "./src",
+    "incremental": true,
+    "typeRoots": ["./node_modules/@types"],
+    "outDir": "lib",
+    "strictNullChecks": true,
+    "target": "es2018",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
+  },
+  "include": ["./src",  "@types"],
+  "exclude": ["node_modules", "bin", "lib", "**/__tests__/*"]
 }

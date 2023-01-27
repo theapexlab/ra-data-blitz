@@ -1,6 +1,6 @@
 {
   "name": "@makivlach/ra-data-blitz",
-  "version": "0.0.18",
+  "version": "0.0.51",
   "description": "A react-admin data provider for Blitz.js.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "tsc -p tsconfig.build.json --declaration && tsc-alias",
+    "build": "tsc -p tsconfig.build.json && tsc-alias",
     "lint": "eslint . --ext .ts",
     "prepare": "npm run build",
     "prepublishOnly": "npm test"
@@ -26,9 +26,6 @@
   },
   "homepage": "https://github.com/theapexlab/ra-data-blitz#readme",
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-typescript": "^7.16.0",
     "@types/jest": "^27.0.3",
     "@types/pluralize": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
@@ -49,7 +46,8 @@
     "react-admin": "*"
   },
   "files": [
-    "lib/**/*"
+    "lib",
+    "@types"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

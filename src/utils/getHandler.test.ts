@@ -5,6 +5,8 @@ describe('getHandler', () => {
   it('should not throw for valid resource and methods', async () => {
     for (const method of Object.values(QueryMethod)) {
       await expect(
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
         getHandler({ handlerRoot: 'app', resource: 'posts', method, invoke: global.mockedInvoke }),
       ).resolves.not.toThrow();
     }
@@ -16,6 +18,8 @@ describe('getHandler', () => {
         handlerRoot: 'app/reactAdmin',
         resource: 'posts',
         method: QueryMethod.Get,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
         invoke: global.mockedInvoke,
       }),
     ).resolves.not.toThrow();
@@ -27,6 +31,8 @@ describe('getHandler', () => {
         handlerRoot: 'app/react-admin',
         resource: 'posts',
         method: QueryMethod.Get,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
         invoke: global.mockedInvoke,
         kebabCase: true,
       }),
@@ -39,6 +45,8 @@ describe('getHandler', () => {
         handlerRoot: 'src/react-admin',
         resource: 'posts',
         method: QueryMethod.Get,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
         invoke: global.mockedInvoke,
         kebabCase: true,
       }),
@@ -51,6 +59,8 @@ describe('getHandler', () => {
         handlerRoot: 'src/reactAdmin',
         resource: 'posts',
         method: QueryMethod.Get,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
         invoke: global.mockedInvoke,
       }),
     ).resolves.not.toThrow();
@@ -58,13 +68,17 @@ describe('getHandler', () => {
 
   it('should throw error for non existing resource', async () => {
     await expect(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
       getHandler({ handlerRoot: '', resource: 'non-existing', method: QueryMethod.Get, invoke: global.mockedInvoke }),
     ).rejects.toThrow();
   });
 
   it('should throw error for non plural resource', async () => {
-    await expect(
-      getHandler({ handlerRoot: '', resource: 'post', method: QueryMethod.Get, invoke: global.mockedInvoke }),
+      await expect(
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          getHandler({ handlerRoot: '', resource: 'post', method: QueryMethod.Get, invoke: global.mockedInvoke }),
     ).rejects.toThrowError(`Resource 'post' MUST be plural!`);
   });
 });

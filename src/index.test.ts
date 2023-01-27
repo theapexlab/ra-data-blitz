@@ -1,6 +1,7 @@
 import getBlitzDataProvider from './index';
+import {DataProvider} from "ra-core";
 
-let dataProvider;
+let dataProvider: DataProvider;
 const searchEntities = (q: string) => ({
   user: {
     name: {
@@ -10,6 +11,7 @@ const searchEntities = (q: string) => ({
 });
 
 beforeEach(() => {
+  // @ts-ignore
   dataProvider = getBlitzDataProvider({ invoke: global.mockedInvoke, searchEntities });
 });
 
@@ -45,16 +47,18 @@ describe('index', () => {
 
   test('getManyReference should work', async () => {
     const response = await dataProvider.getManyReference('posts', {
+      filter: undefined,
+      id: '',
       target: 'comments',
       pagination: { page: 1, perPage: 10 },
-      sort: { field: 'id', order: 'ASC' },
+      sort: { field: 'id', order: 'ASC' }
     });
     expect(response.data).toBeDefined();
     expect(response.total).toBeDefined();
   });
 
   test('update should work', async () => {
-    const response = await dataProvider.update('posts', { id: 1, data: { title: 'asdf' } });
+    const response = await dataProvider.update('posts', {previousData: { id: ''}, id: 1, data: { title: 'asdf' } });
     expect(response.data).toBeDefined();
   });
 
